@@ -67,7 +67,7 @@ router.route('/:id').get(function(req,res) {
     });
 });
 
-// Add Page
+// Add
 router.route('/add').post(function(req, res) {
     let shoe = new Shoe(req.body);
     shoe.save()
@@ -79,7 +79,7 @@ router.route('/add').post(function(req, res) {
         });
 });
 
-// Update Page
+// Update
 router.route('/update/:id').post(function(req, res) {
     Shoe.findById(req.params.id, function(err, shoe) {
         if (!shoe)
@@ -96,4 +96,11 @@ router.route('/update/:id').post(function(req, res) {
             res.status(400).send('Update not possible');
         });
     });
+});
+
+// Delete
+router.route('/:id').delete(function(req, res) {
+    Shoe.findByIdAndDelete(req.params.id)
+        .then(() => res.json({ remove: true }))
+        .catch( err => console.log(err))
 });
