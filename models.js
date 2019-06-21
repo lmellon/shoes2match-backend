@@ -6,7 +6,9 @@ const Schema = mongoose.Schema;
 const shoeSchema = Schema({
     style: { type: String },
     color: { type: String },
-    brand: { type: String }
+    brand: { type: String },
+    image: { type: String },
+    size : { type: Number }
 });
 
 //  ATTACH SCHEMA TO COLLECTION

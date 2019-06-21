@@ -88,6 +88,8 @@ router.route('/update/:id').post(function(req, res) {
             shoe.style = req.body.style;
             shoe.color = req.body.color;
             shoe.brand = req.body.brand;
+            shoe.image = req.body.image;
+            shoe.size = req.body.size;
 
         shoe.save().then(shoe => {
             res.json('Shoe updated!');
