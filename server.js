@@ -40,16 +40,16 @@ app.listen(PORT, () => console.log('Listening on port: ', PORT))
 // ========================
 //     CONTROLLER
 // ========================
-const router = express.Router();
+// const router = express.Router();
 const Shoe = require('./models.js');
 // const router = require('./controllers.js')
-app.use('/shoes', router);
+// app.use('/shoes', router);
 
 // ========================
 //     ROUTES
 // ========================
 // Home Page
-router.route('/').get(function(req,res) {
+app.route('/').get(function(req,res) {
     Shoe.find(function(err, shoes) {
         if (err) {
             console.log(err);
@@ -60,7 +60,7 @@ router.route('/').get(function(req,res) {
 });
 
 // Detail Page
-router.route('/:id').get(function(req,res) {
+app.route('/:id').get(function(req,res) {
     let id = req.params.id;
     Shoe.findById(id, function(err, shoe) {
         res.json(shoe);
@@ -68,7 +68,7 @@ router.route('/:id').get(function(req,res) {
 });
 
 // Add
-router.route('/add').post(function(req, res) {
+app.route('/add').post(function(req, res) {
     let shoe = new Shoe(req.body);
     shoe.save()
         .then(shoe => {
@@ -80,7 +80,7 @@ router.route('/add').post(function(req, res) {
 });
 
 // Update
-router.route('/update/:id').post(function(req, res) {
+app.route('/update/:id').post(function(req, res) {
     Shoe.findById(req.params.id, function(err, shoe) {
         if (!shoe)
             res.status(404).send('data is not found');
@@ -101,7 +101,7 @@ router.route('/update/:id').post(function(req, res) {
 });
 
 // Delete
-router.route('/:id').delete(function(req, res) {
+app.route('/:id').delete(function(req, res) {
     Shoe.findByIdAndDelete(req.params.id)
         .then(() => res.json({ remove: true }))
         .catch( err => console.log(err))
